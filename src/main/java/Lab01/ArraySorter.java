@@ -14,7 +14,6 @@ public class ArraySorter {
             System.out.print("Element " + (i + 1) + ": ");
             myArray[i] = scanner.nextInt();
         }
-        scanner.close();
 
         Arrays.sort(myArray);
 
