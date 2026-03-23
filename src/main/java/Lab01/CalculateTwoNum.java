@@ -1,7 +1,7 @@
 package Lab01;
 import javax.swing.JOptionPane;
 
-public class ex225 {
+public class CalculateTwoNum {
     public static void main(String[] args) {
         String num1Input = JOptionPane.showInputDialog("Enter first integer");
         String num2Input = JOptionPane.showInputDialog("Enter first integer");
