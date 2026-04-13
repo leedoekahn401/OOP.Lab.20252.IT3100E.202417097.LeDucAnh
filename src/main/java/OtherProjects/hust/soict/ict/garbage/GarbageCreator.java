@@ -2,7 +2,7 @@ package OtherProjects.hust.soict.ict.garbage;
 
 import java.util.Random;
 
-public class ConcatenationInLoops {
+public class GarbageCreator {
     public static void main(String[] args) {
         Random r = new Random(123);
 
