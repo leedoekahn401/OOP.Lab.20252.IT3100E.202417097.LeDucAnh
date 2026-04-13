@@ -35,6 +35,7 @@ public class Cart {
         boolean found = false;
         for(int i =0; i< itemsOrdered.length; i++){
             if(itemsOrdered[i].equals(disc)){
+                found = true;
                 for(int j = i; j < qtyOrdered - 1; j++){
                     itemsOrdered[j] = itemsOrdered[j+1];
                 }
