@@ -47,7 +47,7 @@ public class DigitalVideoDisc {
         this.id = nbDigitalVideoDiscs;
     }
 
-    public DigitalVideoDisc(String category, String title, double cost) {
+    public DigitalVideoDisc(String title, String category, double cost) {
         this.category = category;
         this.title = title;
         this.cost = cost;
@@ -55,7 +55,7 @@ public class DigitalVideoDisc {
         this.id = nbDigitalVideoDiscs;
     }
 
-    public DigitalVideoDisc(String director, String category, String title, double cost) {
+    public DigitalVideoDisc(String title, String category, String director, double cost) {
         this.director = director;
         this.category = category;
         this.title = title;
