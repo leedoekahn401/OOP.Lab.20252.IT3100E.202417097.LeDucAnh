@@ -11,7 +11,7 @@ public class ConcatenationInLoops {
         for (int i = 0; i < 65536; i++) {
             s += r.nextInt(2);
         }
-        System.out.println("String (+) time: " + (System.currentTimeMillis() - start) + " ms"); // Prints roughly 4500 [cite: 1085]
+        System.out.println("String (+) time: " + (System.currentTimeMillis() - start) + " ms");
 
         r = new Random(123);
         start = System.currentTimeMillis();
@@ -20,7 +20,7 @@ public class ConcatenationInLoops {
             sb.append(r.nextInt(2));
         }
         s = sb.toString();
-        System.out.println("StringBuilder time: " + (System.currentTimeMillis() - start) + " ms"); // Prints roughly 5 [cite: 1113]
+        System.out.println("StringBuilder time: " + (System.currentTimeMillis() - start) + " ms"); 
 
         r = new Random(123);
         start = System.currentTimeMillis();
