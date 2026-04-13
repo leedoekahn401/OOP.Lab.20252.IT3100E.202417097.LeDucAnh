@@ -16,12 +16,29 @@ public class DigitalVideoDisc {
         return id;
     }
 
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
-    public String getCategory() { return category; }
-    public String getDirector() { return director; }
-    public int getLength() { return length; }
-    public double getCost() { return cost; }
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public double getCost() {
+        return cost;
+    }
 
 
     public DigitalVideoDisc(String title) {
