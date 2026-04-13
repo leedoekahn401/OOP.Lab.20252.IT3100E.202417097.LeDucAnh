@@ -1,4 +1,6 @@
-package AimsProject.src;
+package AimsProject.hust.soict.ict.aims.test;
+
+import AimsProject.hust.soict.ict.aims.disc.DigitalVideoDisc;
 
 public class TestPassingParameter {
 

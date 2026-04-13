@@ -1,4 +1,4 @@
-package AimsProject.src;
+package AimsProject.hust.soict.ict.aims.disc;
 
 public class DigitalVideoDisc {
 
