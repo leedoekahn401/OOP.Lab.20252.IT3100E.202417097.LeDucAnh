@@ -20,7 +20,7 @@ public class ConcatenationInLoops {
             sb.append(r.nextInt(2));
         }
         s = sb.toString();
-        System.out.println("StringBuilder time: " + (System.currentTimeMillis() - start) + " ms"); 
+        System.out.println("StringBuilder time: " + (System.currentTimeMillis() - start) + " ms");
 
         r = new Random(123);
         start = System.currentTimeMillis();
