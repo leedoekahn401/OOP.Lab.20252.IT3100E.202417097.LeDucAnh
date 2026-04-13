@@ -17,7 +17,7 @@ public class CalculateTwoNum {
             message = message + "Quotient Invalid";
             JOptionPane.showMessageDialog(null, message);
         }else{
-          div = num2 / num1;
+          div = num1 / num2;
           message = message + "Division: "+div+"\n";
           JOptionPane.showMessageDialog(null, message);
         }

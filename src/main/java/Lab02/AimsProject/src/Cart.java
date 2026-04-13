@@ -35,25 +35,24 @@ public class Cart {
         boolean found = false;
         for(int i =0; i< itemsOrdered.length; i++){
             if(itemsOrdered[i].equals(disc)){
-                found = true;
-                for(int j = i+1; j < itemsOrdered.length; j++){
-                    itemsOrdered[j] = itemsOrdered[j-1];
+                for(int j = i; j < qtyOrdered - 1; j++){
+                    itemsOrdered[j] = itemsOrdered[j+1];
                 }
+                itemsOrdered[qtyOrdered - 1] = null;
+                qtyOrdered--;
+                System.out.println("The disc has been removed from the cart!");
+                break;
             }
         }
-        if(found){
-            qtyOrdered--;
-            System.out.println("The disc has been removed from the cart!");
-
-        }else{
+        if(!found){
             System.out.println("The disc not found!");
         }
     }
 
     public double totalCost(){
         double total = 0;
-        for(DigitalVideoDisc item : itemsOrdered){
-            total += item.getCost();
+        for(int i = 0; i < qtyOrdered; i++){
+            total += itemsOrdered[i].getCost();
         }
         return total;
     }
