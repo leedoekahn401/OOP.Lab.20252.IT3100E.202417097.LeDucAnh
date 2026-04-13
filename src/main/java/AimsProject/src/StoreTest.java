@@ -19,6 +19,6 @@ public class StoreTest {
         store.removeDVD(dvd2);
 
         System.out.println("\n--- Testing Remove (Non-Existing Item) ---");
-        store.removeDVD(dvd4); 
+        store.removeDVD(dvd4);
     }
 }
