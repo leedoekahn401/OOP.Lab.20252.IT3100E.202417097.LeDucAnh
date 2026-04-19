@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 public class NoGarbage {
     public static void main(String[] args) {
         String filename = "test.txt";
-        byte[] inputBytes = { 0 };
+        byte[] inputBytes = {0};
         long startTime, endTime;
 
         try {
@@ -21,7 +21,7 @@ public class NoGarbage {
 
         StringBuilder outputStringBuilder = new StringBuilder();
         for (byte b : inputBytes) {
-            outputStringBuilder.append((char)b);
+            outputStringBuilder.append((char) b);
         }
         String outputString = outputStringBuilder.toString();
 
