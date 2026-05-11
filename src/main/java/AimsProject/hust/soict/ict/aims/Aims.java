@@ -1,11 +1,7 @@
 package AimsProject.hust.soict.ict.aims;
 
 import AimsProject.hust.soict.ict.aims.cart.Cart;
-import AimsProject.hust.soict.ict.aims.media.Book;
-import AimsProject.hust.soict.ict.aims.media.CompactDisc;
-import AimsProject.hust.soict.ict.aims.media.DigitalVideoDisc;
-import AimsProject.hust.soict.ict.aims.media.Media;
-import AimsProject.hust.soict.ict.aims.media.Playable;
+import AimsProject.hust.soict.ict.aims.media.*;
 import AimsProject.hust.soict.ict.aims.store.Store;
 
 import java.util.Scanner;
@@ -16,14 +12,25 @@ public class Aims {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        DigitalVideoDisc dvd1 = new DigitalVideoDisc(1, "The Lion King", "Animation", 19.95f, 87, "Roger Allers");
-        DigitalVideoDisc dvd2 = new DigitalVideoDisc(2, "Star Wars", "Science Fiction", 24.95f, 124, "George Lucas");
-        Book book1 = new Book(3, "Effective Java", "Programming", 30.00f);
+        DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", 19.95, 87, "Roger Allers");
+        DigitalVideoDisc dvd2 = new DigitalVideoDisc( "Star Wars", "Science Fiction", 24.95, 124, "George Lucas");
+        CompactDisc cd1 = new CompactDisc("Album Danh Doi","Music",20.5,"Obito","Obito");
+        Book book1 = new Book( "Effective Java", "Programming", 30.00);
+        Book book2 = new Book("Object Oriented Programming 1010","Programming",15.6,"Nguyen Thu Trang");
+        Track track1 = new Track("Đánh Đổi",23);
+        Track track2 = new Track("Danh nhau",20);
+
         book1.addAuthor("Joshua Bloch");
+        book1.addAuthor("Joshua Kimmich");
+        cd1.addTrack(track1);
+        cd1.addTrack(track2);
+
 
         store.addMedia(dvd1);
         store.addMedia(dvd2);
+        store.addMedia(cd1);
         store.addMedia(book1);
+        store.addMedia(book2);
 
         int choice;
         do {
@@ -173,7 +180,7 @@ public class Aims {
             System.out.print("Title: "); String title = scanner.nextLine();
             System.out.print("Category: "); String category = scanner.nextLine();
             System.out.print("Cost: "); float cost = scanner.nextFloat(); scanner.nextLine();
-            Book b = new Book(id, title, category, cost);
+            Book b = new Book(title, category, cost);
             store.addMedia(b);
         } else if (choice == 2) {
             System.out.print("Enter title to remove: ");

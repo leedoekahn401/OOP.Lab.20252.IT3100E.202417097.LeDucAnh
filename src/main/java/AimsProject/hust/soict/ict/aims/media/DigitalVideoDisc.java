@@ -2,8 +2,12 @@ package AimsProject.hust.soict.ict.aims.media;
 
 public class DigitalVideoDisc extends Disc implements Playable {
 
-    public DigitalVideoDisc(int id, String title, String category, float cost, int length, String director) {
-        super(id, title, category, cost, length, director);
+    public DigitalVideoDisc(String name) {
+        super(name);
+    }
+
+    public DigitalVideoDisc(String title, String category, double cost, int length, String director) {
+        super(title, category, cost, length, director);
     }
 
     @Override
@@ -19,7 +23,7 @@ public class DigitalVideoDisc extends Disc implements Playable {
 
     @Override
     public String toString() {
-        return "DVD - [" + this.getTitle() + "] - [" + this.getCategory() + "] - [" + this.getDirector() + "] - [" + this.getLength() + "]: [" + this.getCost() + "] $";
+        return "DVD - " + this.getTitle() + " - " + this.getCategory() + " - " + this.getDirector() + " - " + this.getLength() +" - " + this.getCost() + " $";
     }
 
     public boolean isMatch(String title) {

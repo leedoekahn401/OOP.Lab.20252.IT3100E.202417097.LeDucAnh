@@ -18,10 +18,10 @@ public class MediaComparator implements Comparator<Media> {
             if (titleCompare != 0) {
                 return titleCompare;
             }
-            return Float.compare(m2.getCost(), m1.getCost());
+            return Double.compare(m2.getCost(), m1.getCost());
 
         } else if (sortingType == BY_COST_TITLE) {
-            int costCompare = Float.compare(m2.getCost(), m1.getCost());
+            int costCompare = Double.compare(m2.getCost(), m1.getCost());
             if (costCompare != 0) {
                 return costCompare;
             }
