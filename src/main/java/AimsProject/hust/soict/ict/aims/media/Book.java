@@ -4,9 +4,11 @@ import java.util.List;
 
 public class Book extends Media {
     private List<String> authors = new ArrayList<String>();
+    private int contentLength;
 
-    public Book(String title, String category, double cost) {
+    public Book(String title, String category, String contentLength,double cost) {
         super(title, category, cost);
+
     }
 
     public Book(String title, String category,double cost,String... names){
