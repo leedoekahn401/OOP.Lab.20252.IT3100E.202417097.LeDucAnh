@@ -1,7 +1,7 @@
 package AimsProject.hust.soict.ict.aims.screen;
 
 import AimsProject.hust.soict.ict.aims.cart.Cart;
-import AimsProject.hust.soict.ict.aims.media.Media;
+import AimsProject.hust.soict.ict.aims.media.*;
 import AimsProject.hust.soict.ict.aims.store.Store;
 
 import java.awt.*;
