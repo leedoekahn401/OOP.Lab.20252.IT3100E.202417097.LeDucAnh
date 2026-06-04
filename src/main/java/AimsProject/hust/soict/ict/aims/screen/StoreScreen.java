@@ -24,14 +24,40 @@ public class StoreScreen extends JFrame {
         JMenu menu = new JMenu("Options");
 
         JMenu smUpdateStore = new JMenu("Update");
-        smUpdateStore.add(new JMenuItem("Add Book"));
-        smUpdateStore.add(new JMenuItem("Add CD"));
-        smUpdateStore.add(new JMenuItem("Add DVD"));
+
+        JMenuItem addBook = new JMenuItem("Add Book");
+        // Add Action Listener to open the Add Book Screen
+        addBook.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // new AddBookToStoreScreen(store); // Uncomment once you create this class
+                JOptionPane.showMessageDialog(null, "Add Book Screen will open here.");
+            }
+        });
+
+        JMenuItem addCD = new JMenuItem("Add CD");
+        JMenuItem addDVD = new JMenuItem("Add DVD");
+
+        smUpdateStore.add(addBook);
+        smUpdateStore.add(addCD);
+        smUpdateStore.add(addDVD);
 
         menu.add(smUpdateStore);
 
-        menu.add(new JMenuItem("View Store"));
-        menu.add(new JMenuItem("View Cart"));
+        JMenuItem viewStore = new JMenuItem("View Store");
+        JMenuItem viewCart = new JMenuItem("View Cart");
+
+        // Add Action Listener for View Cart
+        viewCart.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // new CartScreen(cart); // Uncomment once CartScreen is created
+                JOptionPane.showMessageDialog(null, "Cart Screen will open here.");
+            }
+        });
+
+        menu.add(viewStore);
+        menu.add(viewCart);
 
         JMenuBar menuBar = new JMenuBar();
         menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -41,7 +67,6 @@ public class StoreScreen extends JFrame {
     }
 
     JPanel createHeader() {
-
         JPanel header = new JPanel();
         header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
 
@@ -49,19 +74,26 @@ public class StoreScreen extends JFrame {
         title.setFont(new Font(title.getFont().getName(), Font.PLAIN, 50));
         title.setForeground(Color.CYAN);
 
-        JButton cart = new JButton("View cart");
-        cart.setPreferredSize(new Dimension(100, 50));
-        cart.setMaximumSize(new Dimension(100, 50));
+        JButton cartBtn = new JButton("View cart");
+        cartBtn.setPreferredSize(new Dimension(100, 50));
+        cartBtn.setMaximumSize(new Dimension(100, 50));
+
+        // Add Action Listener to the Cart Button
+        cartBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Cart Screen will open here.");
+            }
+        });
 
         header.add(Box.createRigidArea(new Dimension(10, 10)));
         header.add(title);
         header.add(Box.createHorizontalGlue());
-        header.add(cart);
+        header.add(cartBtn);
         header.add(Box.createRigidArea(new Dimension(10, 10)));
 
         return header;
     }
-
     JPanel createCenter(){
         JPanel center = new JPanel();
         center.setLayout(new GridLayout(3,3,2,2));

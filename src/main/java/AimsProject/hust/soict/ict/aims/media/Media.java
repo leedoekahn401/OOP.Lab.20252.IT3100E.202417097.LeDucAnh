@@ -70,7 +70,9 @@ public abstract class Media {
     public boolean equals(Object o) {
         if (o == this) return true;
         if (!(o instanceof Media)) return false;
-        return ((Media) o).getTitle().equals(this.title);
+        Media other = (Media) o;
+        if (this.title == null || other.getTitle() == null) return false;
+        return this.title.equals(other.getTitle());
     }
 
     @Override
