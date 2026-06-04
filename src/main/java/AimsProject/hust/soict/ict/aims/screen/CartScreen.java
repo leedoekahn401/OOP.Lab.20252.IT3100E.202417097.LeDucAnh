@@ -28,9 +28,9 @@ public class CartScreen extends JFrame {
             @Override
             public void run() {
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/AimsProject/hust/soict/ict/javafx/cart.fxml"));
 
-                    // FIXED: Injected the controller programmatically so table list updates live
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/AimsProject.hust.soict.ict.aims.screen/cart.fxml"));
+
                     CartScreenController controller = new CartScreenController(cart);
                     loader.setController(controller);
 
