@@ -1,9 +1,11 @@
 package AimsProject.hust.soict.ict.aims;
 
 import AimsProject.hust.soict.ict.aims.cart.Cart;
+import AimsProject.hust.soict.ict.aims.exception.PlayerException;
 import AimsProject.hust.soict.ict.aims.media.*;
 import AimsProject.hust.soict.ict.aims.store.Store;
 
+import javax.swing.JOptionPane;
 import java.util.Scanner;
 
 public class Aims {
@@ -13,18 +15,17 @@ public class Aims {
 
     public static void main(String[] args) {
         DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", 19.95, 87, "Roger Allers");
-        DigitalVideoDisc dvd2 = new DigitalVideoDisc( "Star Wars", "Science Fiction", 24.95, 124, "George Lucas");
-        CompactDisc cd1 = new CompactDisc("Album Danh Doi","Music",20.5,"Obito","Obito");
-        Book book1 = new Book( "Effective Java", "Programming", 30.00);
-        Book book2 = new Book("Object Oriented Programming 1010","Programming",15.6,"Nguyen Thu Trang");
-        Track track1 = new Track("Đánh Đổi",23);
-        Track track2 = new Track("Danh nhau",20);
+        DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars", "Science Fiction", 24.95, 124, "George Lucas");
+        CompactDisc cd1 = new CompactDisc("Album Danh Doi", "Music", 20.5, "Obito", "Obito");
+        Book book1 = new Book("Effective Java", "Programming", 30.00);
+        Book book2 = new Book("Object Oriented Programming 1010", "Programming", 15.6, "Nguyen Thu Trang");
+        Track track1 = new Track("Đánh Đổi", 23);
+        Track track2 = new Track("Danh nhau", 20);
 
         book1.addAuthor("Joshua Bloch");
         book1.addAuthor("Joshua Kimmich");
         cd1.addTrack(track1);
         cd1.addTrack(track2);
-
 
         store.addMedia(dvd1);
         store.addMedia(dvd2);
@@ -121,7 +122,14 @@ public class Aims {
                 cart.addMedia(media);
             } else if (choice == 2) {
                 if (media instanceof Playable) {
-                    ((Playable) media).play();
+                    try {
+                        ((Playable) media).play();
+                    } catch (PlayerException e) {
+                        System.err.println("Error Message: " + e.getMessage());
+                        System.err.println("Error String: " + e.toString());
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(null, e.getMessage(), "Media Player Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 } else {
                     System.out.println("This media cannot be played.");
                 }
@@ -159,7 +167,14 @@ public class Aims {
         Media media = store.searchMedia(title);
         if (media != null) {
             if (media instanceof Playable) {
-                ((Playable) media).play();
+                try {
+                    ((Playable) media).play();
+                } catch (PlayerException e) {
+                    System.err.println("Error Message: " + e.getMessage());
+                    System.err.println("Error String: " + e.toString());
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Media Player Error", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
                 System.out.println("This media cannot be played.");
             }
@@ -186,7 +201,7 @@ public class Aims {
             System.out.print("Enter title to remove: ");
             String title = scanner.nextLine();
             Media m = store.searchMedia(title);
-            if(m!=null) store.removeMedia(m);
+            if (m != null) store.removeMedia(m);
         }
     }
 
@@ -208,15 +223,25 @@ public class Aims {
                     System.out.print("Enter title to remove: ");
                     String title = scanner.nextLine();
                     Media m = cart.searchMedia(title);
-                    if(m!=null) cart.removeMedia(m);
+                    if (m != null) cart.removeMedia(m);
                     else System.out.println("Media not found in cart.");
                     break;
                 case 4:
                     System.out.print("Enter title to play: ");
                     String playTitle = scanner.nextLine();
                     Media pm = cart.searchMedia(playTitle);
-                    if(pm!=null && pm instanceof Playable) ((Playable)pm).play();
-                    else System.out.println("Cannot play.");
+                    if (pm != null && pm instanceof Playable) {
+                        try {
+                            ((Playable) pm).play();
+                        } catch (PlayerException e) {
+                            System.err.println("Error Message: " + e.getMessage());
+                            System.err.println("Error String: " + e.toString());
+                            e.printStackTrace();
+                            JOptionPane.showMessageDialog(null, e.getMessage(), "Media Player Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        System.out.println("Cannot play.");
+                    }
                     break;
                 case 5:
                     System.out.println("Order placed! Cart is now empty.");

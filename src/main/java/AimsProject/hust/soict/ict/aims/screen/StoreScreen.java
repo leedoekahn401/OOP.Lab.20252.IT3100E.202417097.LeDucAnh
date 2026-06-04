@@ -12,31 +12,44 @@ import java.util.ArrayList;
 public class StoreScreen extends JFrame {
     private Store store;
     private Cart cart;
+    private JPanel centerPanel;
+
     JPanel createNorth(){
         JPanel north = new JPanel();
         north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
         north.add(createMenuBar());
         north.add(createHeader());
         return north;
-    };
+    }
 
     JMenuBar createMenuBar(){
         JMenu menu = new JMenu("Options");
-
         JMenu smUpdateStore = new JMenu("Update");
 
         JMenuItem addBook = new JMenuItem("Add Book");
-        // Add Action Listener to open the Add Book Screen
         addBook.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // new AddBookToStoreScreen(store); // Uncomment once you create this class
-                JOptionPane.showMessageDialog(null, "Add Book Screen will open here.");
+                new AddBookToStoreScreen(store, () -> refreshCenter());
             }
         });
 
         JMenuItem addCD = new JMenuItem("Add CD");
+        addCD.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AddCompactDiscToStoreScreen(store, () -> refreshCenter());
+            }
+        });
+
         JMenuItem addDVD = new JMenuItem("Add DVD");
+        addDVD.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Assuming AddDigitalVideoDiscToStoreScreen follows the same architecture
+                new AddDigitalVideoDiscToStoreScreen(store, () -> refreshCenter());
+            }
+        });
 
         smUpdateStore.add(addBook);
         smUpdateStore.add(addCD);
@@ -47,12 +60,10 @@ public class StoreScreen extends JFrame {
         JMenuItem viewStore = new JMenuItem("View Store");
         JMenuItem viewCart = new JMenuItem("View Cart");
 
-        // Add Action Listener for View Cart
         viewCart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // new CartScreen(cart); // Uncomment once CartScreen is created
-                JOptionPane.showMessageDialog(null, "Cart Screen will open here.");
+                new CartScreen(cart);
             }
         });
 
@@ -78,11 +89,10 @@ public class StoreScreen extends JFrame {
         cartBtn.setPreferredSize(new Dimension(100, 50));
         cartBtn.setMaximumSize(new Dimension(100, 50));
 
-        // Add Action Listener to the Cart Button
         cartBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Cart Screen will open here.");
+                new CartScreen(cart);
             }
         });
 
@@ -94,16 +104,26 @@ public class StoreScreen extends JFrame {
 
         return header;
     }
+
     JPanel createCenter(){
         JPanel center = new JPanel();
-        center.setLayout(new GridLayout(3,3,2,2));
+        center.setLayout(new GridLayout(3, 3, 2, 2));
 
         ArrayList<Media> mediaInStore = store.getItemsInStore();
         for(Media media : mediaInStore){
-            MediaStore cell = new MediaStore(media);
+            MediaStore cell = new MediaStore(media, this.cart);
             center.add(cell);
         }
         return center;
+    }
+
+
+    public void refreshCenter() {
+        remove(centerPanel);
+        centerPanel = createCenter();
+        add(centerPanel, BorderLayout.CENTER);
+        revalidate();
+        repaint();
     }
 
     public StoreScreen(Store store, Cart cart) {
@@ -112,9 +132,13 @@ public class StoreScreen extends JFrame {
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());
         cp.add(createNorth(), BorderLayout.NORTH);
-        cp.add(createCenter(), BorderLayout.CENTER);
+
+        // Save component reference layout locally
+        centerPanel = createCenter();
+        cp.add(centerPanel, BorderLayout.CENTER);
+
         setTitle("Store");
-        setSize(1024,768);
+        setSize(1024, 768);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
@@ -123,8 +147,7 @@ public class StoreScreen extends JFrame {
         SwingUtilities.invokeLater(() -> {
             Store store = new Store();
             Cart cart = new Cart();
-            new StoreScreen(store,cart);
+            new StoreScreen(store, cart);
         });
     }
-
 }

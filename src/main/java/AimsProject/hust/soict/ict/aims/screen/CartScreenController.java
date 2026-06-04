@@ -6,6 +6,7 @@ import AimsProject.hust.soict.ict.aims.media.Media;
 import AimsProject.hust.soict.ict.aims.media.Playable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -15,6 +16,7 @@ import javax.swing.*;
 
 public class CartScreenController {
     private Cart cart;
+    private FilteredList<Media> filteredList;
 
     @FXML private TableView<Media> tblMedia;
     @FXML private TableColumn<Media, String> colMediaTitle;
@@ -38,7 +40,9 @@ public class CartScreenController {
         colMediacategory.setCellValueFactory(new PropertyValueFactory<Media, String>("category"));
         colMediaCost.setCellValueFactory(new PropertyValueFactory<Media, Float>("cost"));
 
-        tblMedia.setItems(this.cart.getItemsOrdered());
+        // Wrap the observable list into a FilteredList
+        filteredList = new FilteredList<>(this.cart.getItemsOrdered(), p -> true);
+        tblMedia.setItems(filteredList);
 
         btnPlay.setVisible(false);
         btnRemove.setVisible(false);
@@ -54,6 +58,31 @@ public class CartScreenController {
                     }
                 }
         );
+
+        // Track text changes on the text input box
+        tfFilter.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                showFilteredMedia(newValue);
+            }
+        });
+    }
+
+    private void showFilteredMedia(String newValue) {
+        filteredList.setPredicate(media -> {
+            if (newValue == null || newValue.trim().isEmpty()) {
+                return true;
+            }
+            String lowerCaseFilter = newValue.toLowerCase().trim();
+
+            if (radioBtnFilterId.isSelected()) {
+                return String.valueOf(media.getId()).contains(lowerCaseFilter);
+            } else if (radioBtnFilterTitle.isSelected()) {
+                if (media.getTitle() == null) return false;
+                return media.getTitle().toLowerCase().contains(lowerCaseFilter);
+            }
+            return true;
+        });
     }
 
     void updateButtonBar(Media media) {
@@ -78,6 +107,7 @@ public class CartScreenController {
         try {
             if (media instanceof Playable) {
                 ((Playable) media).play();
+                JOptionPane.showMessageDialog(null, "Playing: " + media.getTitle());
             }
         } catch (PlayerException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Illegal Media Length", JOptionPane.ERROR_MESSAGE);
